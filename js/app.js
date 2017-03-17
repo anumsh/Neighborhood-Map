@@ -3,7 +3,7 @@ showMapMessage = ko.observable(false);
 //loads the google maps API
 function initMap() {
 
-    // Create a map object and specify the DOM element for display.
+    // Create a map
     var mapOptions =  {
         center: {lat: 37.338208, lng: -121.886329},
         zoom: 11,
@@ -220,7 +220,7 @@ var viewModel = function() {
         self.restaurants.push(new Restaurant(restaurantItem));
     });
 
-    //set markers, request foursquare data and set listeners
+    //set markers
     self.restaurants().forEach(function(restaurantItem){
 
         //define markers
