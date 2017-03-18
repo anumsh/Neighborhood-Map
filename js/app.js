@@ -10,56 +10,77 @@ function initMap() {
         scrollwheel: false,
         styles: [
     {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
         "stylers": [
             {
-                "saturation": -100
+                "color": "#747474"
             },
             {
-                "gamma": 1
+                "lightness": "23"
             }
         ]
     },
     {
-        "elementType": "labels.text.stroke",
+        "featureType": "poi.attraction",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#f38eb0"
             }
         ]
     },
     {
-        "featureType": "poi.business",
-        "elementType": "labels.text",
+        "featureType": "poi.government",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#ced7db"
             }
         ]
     },
     {
-        "featureType": "poi.business",
-        "elementType": "labels.icon",
+        "featureType": "poi.medical",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#ffa5a8"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#c7e5c8"
             }
         ]
     },
     {
         "featureType": "poi.place_of_worship",
-        "elementType": "labels.text",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#d6cbc7"
             }
         ]
     },
     {
-        "featureType": "poi.place_of_worship",
-        "elementType": "labels.icon",
+        "featureType": "poi.school",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#c4c9e8"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#b1eaf1"
             }
         ]
     },
@@ -68,33 +89,64 @@ function initMap() {
         "elementType": "geometry",
         "stylers": [
             {
+                "lightness": "100"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            },
+            {
+                "lightness": "100"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffd4a5"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffe9d2"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
                 "visibility": "simplified"
             }
         ]
     },
     {
-        "featureType": "water",
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "on"
-            },
-            {
-                "saturation": 50
-            },
-            {
-                "gamma": 0
-            },
-            {
-                "hue": "#50a5d1"
+                "weight": "3.00"
             }
         ]
     },
     {
-        "featureType": "administrative.neighborhood",
-        "elementType": "labels.text.fill",
+        "featureType": "road.local",
+        "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#333333"
+                "weight": "0.30"
             }
         ]
     },
@@ -103,22 +155,52 @@ function initMap() {
         "elementType": "labels.text",
         "stylers": [
             {
-                "weight": 0.5
-            },
-            {
-                "color": "#333333"
+                "visibility": "on"
             }
         ]
     },
     {
-        "featureType": "transit.station",
-        "elementType": "labels.icon",
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
         "stylers": [
             {
-                "gamma": 1
+                "color": "#747474"
             },
             {
-                "saturation": 50
+                "lightness": "36"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#e9e5dc"
+            },
+            {
+                "lightness": "30"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": "100"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#d2e7f7"
             }
         ]
     }
@@ -197,7 +279,6 @@ var Restaurant = function(data) {
     self.lat = ko.observable(data.lat);
     self.lng = ko.observable(data.lng);
     self.marker = ko.observable();
-    self.address = ko.observable('');
     self.contentString = ko.observable('');
 
 };
@@ -221,18 +302,18 @@ var viewModel = function() {
     //set markers
     self.restaurants().forEach(function(restaurantItem){
 
-        //define markers
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(restaurantItem.lat(), restaurantItem.lng()),
-            map: map,
-            icon: image,
-            animation: google.maps.Animation.DROP
-        });
-        restaurantItem.marker = marker;
+    //define markers
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(restaurantItem.lat(), restaurantItem.lng()),
+        map: map,
+        icon: image,
+        animation: google.maps.Animation.DROP
+    });
+    restaurantItem.marker = marker;
 
-				// Content of the infowindow
-restaurantItem.contentString = '<div"><h5>' + restaurantItem.name() + '</h5>' +
-  '<p>' + restaurantItem.lat() + ',' + restaurantItem.lng() + '>Directions</p></div>';
+    // Content of the infowindow
+                restaurantItem.contentString = '<div> <h5>' + restaurantItem.name() + '</h5>' +
+                         + '<div> <p>'+ restaurantItem.lat() + ',' + restaurantItem.lng() + '</p></div>';
 
 // Add infowindows
 google.maps.event.addListener(restaurantItem.marker, 'click', function () {
@@ -263,30 +344,37 @@ google.maps.event.addListener(restaurantItem.marker, 'click', function () {
         self.locationList.push(resto);
     });
 
+    // Array containing markers based on search
+    self.visible = ko.observableArray();
+
+    // All markers are visible by default
+    self.locationList().forEach(function (resto) {
+        self.visible.push(resto);
+    });
     // search box
     self.search = ko.observable('');
 
     //filter part of locations
-    self.filter = ko.computed (function() {
-        // Set all markers and places to not visible.
+    self.filter = function() {
         searchInput = self.search().toLowerCase();
         //close current infowindows when user try to search on box
         infowindow.close();
-				if(!searchInput) {
-					return self.locationList();
-				}
-        else {
-          // ko.utils.arrayFilter method returns a matching subset of items
-            return ko.utils.arrayFilter(self.locationList(), function(resto) {
-                return (resto.name().toLowerCase().indexOf(searchInput) != -1);  // match? true else false
-        });
-        }
-      }, this);
+        self.visible.removeAll();
+        self.locationList().forEach(function (resto) {
+           resto.marker.setVisible(false);
+               // If user input is included in the name, set marker as visible
+               if (resto.name().toLowerCase().indexOf(searchInput) !== -1) {
+               self.visible.push(resto);
+           }
+       });
 
-      //
-			this.resetLoc = function() {
-	         self.search("");
-	     }
+       self.visible().forEach(function (resto) {
+           resto.marker.setVisible(true);
+       });
+     };
+
+
+
 		}
                                );
 };
