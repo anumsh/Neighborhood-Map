@@ -1,15 +1,22 @@
 html,body {
 height:100%;
-margin:0;
+margin:2px;
 padding:0;
 }
 
 #bg {
-height:100%;
-background-color:#5D6D7E;
-overflow:scroll;
-}
 
+height:100%;
+background-color:#6AC095  ;
+overflow:scroll;
+border: 2px solid #EE9A11;
+}
+/* #B5ECD1 */
+#searchinput {
+    font-size: 18pt;
+    height: 35px;
+    width : 260px;
+}
 
 #formElement {
 margin:5% 5% 5% 7%;
@@ -30,20 +37,22 @@ font-weight: 900;
 }
 
 h2 {
-  color: #EE9A11;
+  color: #56645D  ;
   font-family: Chalkduster, fantasy;
-  font-style: normal;;
-  font-size: 28px;
+  font-style: normal;
+  font-size: 25px;
   font-weight: bolder;
 
 }
-h6 {
-  color: #322D2B;
-  font-size: 15px;
+h4 {
+  color: #56645D;
+  font-size: 20px;
   font-weight: bolder;
 }
 ul li:hover {
-cursor:pointer;
+    font-size: 18px;
+  	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  	color:#EE9A11;
 }
 
 
@@ -52,9 +61,11 @@ height:100%;
 }
 
 footer {
-    height: 35px;
+    height: 40px;
     text-align: center;
     //margin-top: 1em;
-    color: #090B0C;
-    background-color: #E67E22;
+    color: #56645D;
+    border-style: solid;
+    border-color:#EE9A11;
+    background-color: #6AC095;
 }
