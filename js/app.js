@@ -1,6 +1,8 @@
+// declare global variables
 var map,
 showMapMessage = ko.observable(false);
-//loads the google maps API
+
+// 1. loads the google map
 function initMap() {
 
     // Create a map
@@ -210,16 +212,18 @@ function initMap() {
     var mapDiv = document.getElementById('map');
     map = new google.maps.Map(mapDiv, mapOptions);
 
-    ko.applyBindings(new viewModel());
+    ko.applyBindings(new viewModel()); // activate knockout
 }
 
-//google map error message
+//google map error message ????????????/   not working ????????????
 function googleError() {
+  console.log("google errror");
+  alert("google map not loaded");
     showMapMessage(true);
+
 }
 
-
-//Model
+// 2. Model
 
 var Locations = [
 	{
@@ -271,7 +275,7 @@ var Locations = [
 	}
 ];
 
-// javascript constructor
+// 3. javascript constructor
 
 var Restaurant = function(data) {
     var self = this;
@@ -283,23 +287,18 @@ var Restaurant = function(data) {
 
 };
 
-//viewModel
+// 4. ViewModel
 var viewModel = function() {
-
     var self = this;
-
-		var infowindow = new google.maps.InfoWindow({maxWidth:200}),
-        image = 'images/icon.png',
-        location,
-        marker;
-
+		var infowindow = new google.maps.InfoWindow({maxWidth:200}), // define infowindow
+        image = 'images/icon.png'; // marker image
     self.restaurants = ko.observableArray([]); // array of restaurants
     //call the constructor
     Locations.forEach(function(restaurantItem){
         self.restaurants.push(new Restaurant(restaurantItem));
     });
 
-    //set markers
+    // 5. set markers
     self.restaurants().forEach(function(restaurantItem){
 
     //define markers
@@ -310,36 +309,29 @@ var viewModel = function() {
         animation: google.maps.Animation.DROP
     });
     restaurantItem.marker = marker;
+    //console.log(restaurantItem.marker);
 
-    // Content of the infowindow
-                restaurantItem.contentString = '<div> <h5>' + restaurantItem.name() + '</h5>' +
-                         + '<div> <p>'+ restaurantItem.lat() + ',' + restaurantItem.lng() + '</p></div>';
+  // 6.1 Content of the infowindow
+    restaurantItem.contentString = '<div><h5>' + restaurantItem.name() + '</h5>'
+                      + '<div><p>' +
+                      restaurantItem.lat() + ',' + restaurantItem.lng() + '>Directions</a></p></div>';
 
-// Add infowindows
-google.maps.event.addListener(restaurantItem.marker, 'click', function () {
-		infowindow.open(map, this);
-		// Bounce animation
-		restaurantItem.marker.setAnimation(google.maps.Animation.BOUNCE);
-		setTimeout(function () {
-				restaurantItem.marker.setAnimation(null);
-		}, 1400);
-		infowindow.setContent(restaurantItem.contentString);
-		window.setTimeout(function() {
-									 map.panTo(marker.getPosition());
-							 }, 3000);
-
-					 });
-
+      // 6.2 Add infowindows
+              google.maps.event.addListener(restaurantItem.marker, 'click', function () {
+                infowindow.setContent(restaurantItem.contentString);
+                infowindow.open(map, restaurantItem.marker);
+                restaurantItem.marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () {
+                    restaurantItem.marker.setAnimation(null);
+                }, 1400);
+              });
 
     // Show the marker when the user clicks the list
     self.showInfo = function (restaurantItem) {
         google.maps.event.trigger(restaurantItem.marker, 'click');
     };
-
-
     self.locationList = ko.observableArray(); // location list array
-
-    // push all the resturant data  into locationList
+    // push all the restaurant data  into locationList
     self.restaurants().forEach(function (resto) {
         self.locationList.push(resto);
     });
@@ -371,10 +363,6 @@ google.maps.event.addListener(restaurantItem.marker, 'click', function () {
        self.visible().forEach(function (resto) {
            resto.marker.setVisible(true);
        });
-     };
-
-
-
-		}
-                               );
-};
+     }; //filter close
+  }); //locationlist close
+}; // view model close
