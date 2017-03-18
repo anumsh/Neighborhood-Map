@@ -326,27 +326,28 @@ var viewModel = function() {
                 }, 1400);
               });
 
-    // Show the marker when the user clicks the list
+    // 7. Show the marker when the user clicks the list
     self.showInfo = function (restaurantItem) {
         google.maps.event.trigger(restaurantItem.marker, 'click');
     };
-    self.locationList = ko.observableArray(); // location list array
+    // 8.LocationLists Observable Array
+    self.locationList = ko.observableArray();
     // push all the restaurant data  into locationList
     self.restaurants().forEach(function (resto) {
         self.locationList.push(resto);
     });
 
-    // Array containing markers based on search
+    // 9. Visible Observable Array containing markers based on search
     self.visible = ko.observableArray();
 
     // All markers are visible by default
     self.locationList().forEach(function (resto) {
         self.visible.push(resto);
     });
-    // search box
+    // 10. search observable
     self.search = ko.observable('');
 
-    //filter part of locations
+    // 11. Filtering the restarant locations
     self.filter = function() {
         searchInput = self.search().toLowerCase();
         //close current infowindows when user try to search on box
@@ -359,7 +360,6 @@ var viewModel = function() {
                self.visible.push(resto);
            }
        });
-
        self.visible().forEach(function (resto) {
            resto.marker.setVisible(true);
        });
