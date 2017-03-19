@@ -311,13 +311,64 @@ var viewModel = function() {
     restaurantItem.marker = marker;
     //console.log(restaurantItem.marker);
 
+
+    /* 12. generate a random number for Yelp API Oauth.
+    function nonce_generate() {
+    return (Math.floor(Math.random() * 1e12).toString());
+    }
+    var yelp_url = "https://api.yelp.com/v2/search";
+    var consumer_secret = "8YiYqoIH8yrBge1VJ-4o0xefHQA";
+    var token_secret = "UYJXGd82lDo1uNX3NyU4aR32vZg";
+
+    var yelp_api = function(resto) {
+      var parameters = {
+          oauth_consumer_key: 'bDoIh_q-GXKQ2GDX-gkx9w',
+          oauth_token: 'Buej2WYz709jlUxKhGz91gfnhDGOjLBg',
+          oauth_nonce: nonce_generate(),
+          oauth_timestamp: Math.floor(Date.now() / 1000),
+          oauth_signature_method: 'HMAC-SHA1',
+          oauth_version: '1.0',
+          callback: 'cb',
+          term: 'restaurant',
+          location: 'San Jose',
+          limit: 1
+      };
+      //Generate Oauth signature
+      var encodedSignature = oauthSignature.generate('GET', yelp_url, parameters, consumer_secret, token_secret);
+      parameters.oauth_signature = encodedSignature;
+
+      var settings = {
+          url: yelp_url,
+          data: parameters,
+          cache: true,
+          dataType: 'jsonp',
+          success: function(results) {
+            console.log(results);
+            results.businesses.forEach(function(business) {
+                    yelpPlaces.push(business.rating);
+                    console.log(business.rating);
+                });
+
+
+          },
+          error: function() {
+            alert("The Yelp API call has failed. Please try again.");
+          }
+      };
+      $.ajax(settings);
+    };
+
+*/
+
+
   // 6.1 Content of the infowindow
     restaurantItem.contentString = '<div><h5>' + restaurantItem.name() + '</h5>'
                       + '<div><p>' +
-                      restaurantItem.lat() + ',' + restaurantItem.lng() + '>Directions</a></p></div>';
+                      restaurantItem.lat() + ',' + restaurantItem.lng() + 'Directions</p></div>';
 
       // 6.2 Add infowindows
               google.maps.event.addListener(restaurantItem.marker, 'click', function () {
+                //yelp_api(restaurantItem);
                 infowindow.setContent(restaurantItem.contentString);
                 infowindow.open(map, restaurantItem.marker);
                 restaurantItem.marker.setAnimation(google.maps.Animation.BOUNCE);
