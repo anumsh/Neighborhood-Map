@@ -1,71 +1,68 @@
-html,body {
-height:100%;
-margin:2px;
-padding:0;
+html,
+body {
+    height: 100%;
+    margin: 2px;
 }
 
-#bg {
-
-height:100%;
-background-color:#6AC095  ;
-overflow:scroll;
-border: 2px solid #EE9A11;
+#backarea {
+    height: 100%;
+    background-color: #6AC095;
+    overflow: scroll;
+    border: 2px solid #EE9A11;
 }
-/* #B5ECD1 */
+
 #searchinput {
     font-size: 14pt;
     height: 35px;
-    width : 260px;
+    width: 260px;
 }
 
 #formElement {
-margin:5% 5% 5% 7%;
-padding:1% 1% 1% 3%;
+    margin: 3% 5% 5% 3%;
+    padding: 1% 1% 1% 1%;
 }
 
-ul {
-list-style:none;
-}
-
-ul li {
-margin:2px;
-padding:1.5%;
-color: #5D6D7E  ;
-font-family: 'Leckerli One', cursive;
-font-size: 20px;
-font-weight: 900;
+.row,
+#map,
+#list-view,
+.container-fluid {
+    height: 100%;
 }
 
 h2 {
-  color: #2A221C    ;
-  font-family: 'Leckerli One', cursive;
-  font-style: normal;
-  font-size: 25px;
-  font-weight: bolder;
-
+    color: #2A221C;
+    font-family: 'Khula', sans-serif;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: bolder;
 }
+
 h4 {
-  color: #2A221C;
-  font-size: 20px;
-  font-weight: bolder;
+    color: #2A221C;
+    font-size: 20px;
+    font-weight: bolder;
 }
+
+ul li {
+    margin: 2px;
+    padding: 1%;
+    color: #5D6D7E;
+    font-family: 'Khula', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 ul li:hover {
-    font-size: 18px;
-  	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  	color:#EE9A11;
-}
-
-
-.row,#map,#list-view,.container-fluid {
-height:100%;
+    font-size: 23px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    color: #EE9A11;
 }
 
 footer {
     height: 40px;
     text-align: center;
-    //margin-top: 1em;
     color: #56645D;
     border-style: solid;
-    border-color:#EE9A11;
+    border-color: #EE9A11;
     background-color: #6AC095;
 }
