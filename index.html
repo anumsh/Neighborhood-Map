@@ -1,51 +1,68 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> Neighborhood Map</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- own css file -->
-        <link rel="stylesheet" href="css/style.css">
-        <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
-    
-    </head>
-    <body>
-      <div class="container-fluid">  <!-- container-fluid start -->
-         <div class="row" id="bg">  <!-- row start -->
-            <div class="col-md-3">   <!-- column 1 start -->
-               <div class="row" id="formElement">
-                <h2> Indian Restaurants in San Jose</h2>
-                 <div>
-                     <input type="text" id="searchinput" data-bind="textInput : search, event: {keyup: filter}" placeholder="Search Location" autocomplete="on" >
-                 </div>
-                 <div>
-                   <br>
-                 <h4>Key Locations:</h4>
-                 <ul data-bind="foreach: visible">
-                  <li data-bind="text: name, click: $parent.showInfo"></li>
-                  </ul>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Neighborhood Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- own css file -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- container-fluid start -->
+        <header>
+            <!-- header start -->
+            <div data-bind="visible: mapLoadError">
+                <h1> google map is not loading. please try again </h1>
+        </header>
+        <!-- header end -->
+        <div class="row" id="backarea">
+            <!-- row start -->
+            <div class="col-md-3">
+                <!-- column 1 start -->
+                <div class="row" id="formElement">
+                    <h2> Indian Restaurants in San Jose</h2>
+                    <div>
+                        <!-- knockout binding on search box-->
+                        <input type="text" id="searchinput" data-bind="textInput : search, event: {keyup: filter}" placeholder="Search Location" autocomplete="on">
+                    </div>
+                    <div>
+                        <br>
+                        <h4>Key Locations:</h4>
+                        <!-- knockout binding on location list-->
+                        <ul type="square" data-bind="foreach: visible">
+                            <li data-bind="text: name, click: $parent.showMarker"></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>  <!-- column 1 end -->
-
-          </div>
-            <div class="col-md-9" id="map">  <!-- column 2 start -->
-            </div> <!-- column 2 end-->
-         </div> <!-- row end -->
-      </div> <!-- container fluid end -->
-      <footer>  <!--footer start -->
-		<p>Udacity Full Stack Nanodegree - Neighborhood Map Project</p>
-</footer> <!-- footer close -->
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDicWjE8Q_t-V6-AS4GC_EK42LkGJJsaSM&v=3&callback=initMap" onerror="googleError()" async defer> </script>
-
-         <script src="js/knockout-3.2.0.js"></script>
-         <script src="js/oauth-signature.min.js"></script>
-         <script async src="js/jQuery-min.js"></script>
-         <script async src="js/app.js"></script>
-
+            </div>
+            <!-- column 1 end -->
+            <div class="col-md-9" id="map">
+                <!-- column 2 start -->
+            </div>
+        </div>
+        <!-- column 2 end-->
+        </div>
+        <!-- row end -->
+    </div>
+    <!-- container fluid end -->
+    <footer>
+        <!--footer start -->
+        <p>Udacity Full Stack Nanodegree - Neighborhood Map Project(made by Anum Sharma)</p>
+    </footer>
+    <!-- footer close -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDicWjE8Q_t-V6-AS4GC_EK42LkGJJsaSM&v=3&callback=initMap" onerror="googleError()" async defer>
+    </script>
+    <script src="js/knockout-3.2.0.js"></script>
+    <script src="js/oauth-signature.min.js"></script>
+    <script async src="js/jQuery-min.js"></script>
+    <script async src="js/app.js"></script>
 </body>
 
 </html>
