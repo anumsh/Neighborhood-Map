@@ -1,6 +1,6 @@
 // declare global variables
-var map,
-	mapLoadError = ko.observable(false);
+var map;
+	//mapLoadError = ko.observable(false);
 // 1. load the google map
 function initMap() {
 	// create a map
@@ -224,6 +224,7 @@ var viewModel = function() {
 
 	//yelp error
     //self.showMessage = ko.observable(false);
+		self.yelpNotLoading = ko.observable("");
 	// 5. set markers
 	self.restaurants().forEach(function(restaurantItem) {
 		//define markers
@@ -240,7 +241,7 @@ var viewModel = function() {
 			return (Math.floor(Math.random() * 1e12).toString());
 		}
 		var yelp_url = 'https://api.yelp.com/v2/business/' + restaurantItem.yelpid(),
-			consumer_secret = "YiYqoIH8yrBge1VJ-4o0xefHQA",
+			consumer_secret = "8YiYqoIH8yrBge1VJ-4o0xefHQA",
 			token_secret = "GIbHDbxWsKRu9msvGGqjSu3cAWo",
 			parameters = {
 				oauth_consumer_key: 'bDoIh_q-GXKQ2GDX-gkx9w',
@@ -280,7 +281,7 @@ var viewModel = function() {
 			});
 		}).fail(function(e) {
 			// alert the message if Yelp API fails to implement
-			$('header').append('<h1> yelp data is not loading </h1>');
+			self.yelpNotLoading('<h1> yelp data is not loading </h1>');
 		});
 		// 8.LocationLists Observable Array
 		self.locationList = ko.observableArray();

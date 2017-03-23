@@ -38,7 +38,9 @@
                         <!-- knockout binding on location list-->
                         <ul type="square" data-bind="foreach: visible">
                             <li data-bind="text: name, click: $parent.showMarker"></li>
-                        </ul>
+                        </ul> <br>
+
+                        <div data-bind="html: yelpNotLoading"></div>
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@
     <script  src="js/jQuery-min.js"></script>
     <script  src="js/oauth-signature.min.js"></script>
     <script  src="app.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDicWjE8Q_t-V6-AS4GC_EK42LkGJJsaSM&v=3&callback=initMap" onerror="googleError()" >
+    <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDicWjE8Q_t-V6-AS4GC_EK42LkGJJsaSM&v=3&callback=initMap" onerror="googleError()">
     </script>
 
 </body>
