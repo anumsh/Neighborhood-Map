@@ -150,7 +150,7 @@ function initMap() {
 // google map error function
 // mapLoadError observable  will be true if googleError() occur
 function googleError() {
-	mapLoadError(true);
+	$('header').append('<h1> google map is not loading. please try again </h1>');
 }
 // 2. Model
 var Locations = [{
@@ -240,7 +240,7 @@ var viewModel = function() {
 			return (Math.floor(Math.random() * 1e12).toString());
 		}
 		var yelp_url = 'https://api.yelp.com/v2/business/' + restaurantItem.yelpid(),
-			consumer_secret = "8YiYqoIH8yrBge1VJ-4o0xefHQA",
+			consumer_secret = "YiYqoIH8yrBge1VJ-4o0xefHQA",
 			token_secret = "GIbHDbxWsKRu9msvGGqjSu3cAWo",
 			parameters = {
 				oauth_consumer_key: 'bDoIh_q-GXKQ2GDX-gkx9w',
@@ -280,7 +280,7 @@ var viewModel = function() {
 			});
 		}).fail(function(e) {
 			// alert the message if Yelp API fails to implement
-			alert("Oops!! there is something wrong in loading Yelp API data. ");
+			$('header').append('<h1> yelp data is not loading </h1>');
 		});
 		// 8.LocationLists Observable Array
 		self.locationList = ko.observableArray();
