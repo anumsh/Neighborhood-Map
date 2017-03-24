@@ -26,7 +26,7 @@ Develop a single page application featuring a map of your neighborhood.This map 
 * [Yelp API Implemention](https://discussions.udacity.com/t/how-to-make-ajax-request-to-yelp-api/13699)
 * [Yelp Business Implemention guidance](https://discussions.udacity.com/t/yelp-api-implementation-issue/230634/2)
 * [Longitude and Latitude values](http://www.latlong.net/convert-address-to-lat-long.html)
-*[Google Map Style-Flat Colors](https://snazzymaps.com/style/19955/flat-colors)
+* [Google Map Style-Flat Colors](https://snazzymaps.com/style/19955/flat-colors)
 * [MVVM framework overview](https://classroom.udacity.com/nanodegrees/nd004/parts/00413454011/modules/bb387669-2b0b-4b27-ba08-5219101b23aa/lessons/71a883ec-890f-4243-b6e3-010b343508e1/concepts/34279987320923#)
 * [Udacity Discussion Forum](https://discussions.udacity.com/c/nd001-neighborhood-map-project)
 
