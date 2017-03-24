@@ -1,6 +1,5 @@
-// declare global variables
+// declare global variable
 var map;
-	//mapLoadError = ko.observable(false);
 // 1. load the google map
 function initMap() {
 	// create a map
@@ -147,11 +146,11 @@ function initMap() {
 	map = new google.maps.Map(mapDiv, mapOptions);
 	ko.applyBindings(new viewModel()); // activate knockout
 }
-// google map error function
-// mapLoadError observable  will be true if googleError() occur
+// google map load error function using jquery
 function googleError() {
-	$('header').append('<h1> google map is not loading. please try again </h1>');
+	$('header').append('<h2> Oops!! something went wrong. This page didnot load google map. Refresh again</h2>');
 }
+
 // 2. Model
 var Locations = [{
 	name: 'Swaad Indian Cuisine',
@@ -212,9 +211,10 @@ var Restaurant = function(data) {
 // 4. ViewModel
 var viewModel = function() {
 	var self = this;
+	// define infowindow
 	var infowindow = new google.maps.InfoWindow({
 			maxWidth: 200
-		}), // define infowindow
+		}),
 		image = 'images/icon.png'; // marker image
 	self.restaurants = ko.observableArray([]); // array of restaurants
 	//call the constructor
@@ -222,8 +222,7 @@ var viewModel = function() {
 		self.restaurants.push(new Restaurant(restaurantItem));
 	});
 
-	//yelp error
-    //self.showMessage = ko.observable(false);
+	//yelpNotLoading observable
 		self.yelpNotLoading = ko.observable("");
 	// 5. set markers
 	self.restaurants().forEach(function(restaurantItem) {
@@ -270,7 +269,7 @@ var viewModel = function() {
 				category = data.categories[0][0];
 			// Create info window that displays information of a place.
 			restaurantItem.contentString = '<div><h3>' + restaurantItem.name() + '</h3>' + '<p><strong>Category: </strong>' + category + '</p>' + '<p><strong>Address: </strong>' + address + '</p>' + '<p><strong>Phone: </strong>' + phone + '</p>' + '<p><strong>Yelp Ratings: </strong>' + '<img src="' + rating + '"></p>' + '<p><strong>Reviews: </strong>' + snippet + '</p>' + '<p><a href="' + link + '">checkout more about restaurant</a></p>' + '</div>';
-			// 7  Add infowindows
+			// 7  Add infowindow
 			google.maps.event.addListener(restaurantItem.marker, 'click', function() {
 				infowindow.setContent(restaurantItem.contentString); // set yelp API contents in window
 				infowindow.open(map, restaurantItem.marker); // open the infowindow
@@ -280,8 +279,8 @@ var viewModel = function() {
 				}, 1400);
 			});
 		}).fail(function(e) {
-			// alert the message if Yelp API fails to implement
-			self.yelpNotLoading('<h1> yelp data is not loading </h1>');
+			// display the message on left side if Yelp API fails to implement
+			self.yelpNotLoading('<h3> Oops!! yelp data is not available once you click on markers.Please check the credentails again. </h3>');
 		});
 		// 8.LocationLists Observable Array
 		self.locationList = ko.observableArray();
