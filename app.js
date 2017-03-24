@@ -240,11 +240,11 @@ var viewModel = function() {
 			return (Math.floor(Math.random() * 1e12).toString());
 		}
 		var yelp_url = 'https://api.yelp.com/v2/business/' + restaurantItem.yelpid(),
-			consumer_secret = "8YiYqoIH8yrBge1VJ-4o0xefHQA",
-			token_secret = "GIbHDbxWsKRu9msvGGqjSu3cAWo",
+			consumer_secret = "xxxxxxxxxxxxxxxxxxxxxxx",
+			token_secret = "xxxxxxxxxxxxxxxxxxxxxxx",
 			parameters = {
-				oauth_consumer_key: 'bDoIh_q-GXKQ2GDX-gkx9w',
-				oauth_token: 'utXesamtQahrYxq8VHYctiAcvQlmTrP9',
+				oauth_consumer_key: 'xxxxxxxxxxxxxxxxxx',
+				oauth_token: 'xxxxxxxxxxxxxxxxxxxxx',
 				oauth_nonce: nonce_generate(),
 				oauth_timestamp: Math.floor(Date.now() / 1000),
 				oauth_signature_method: 'HMAC-SHA1',
